@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080e19">
+  <title>ElectroFix AI | Electronics Assistant</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #080e19;
+      color: #f1f5f9;
+    }
+    header {
+      padding: 20px;
+      border-bottom: 1px solid #263449;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo { font-size: 21px; font-weight: bold; }
+    .logo span { color: #38bdf8; }
+    .hero {
+      max-width: 760px;
+      margin: 65px auto 35px;
+      padding: 20px;
+      text-align: center;
+    }
+    .tag {
+      color: #38bdf8;
+      letter-spacing: 2px;
+      font-size: 12px;
+    }
+    h1 { font-size: clamp(32px, 7vw, 52px); }
+    h1 span { color: #38bdf8; }
+    .hero p { color: #94a3b8; line-height: 1.7; }
+    .panel {
+      max-width: 650px;
+      margin: auto;
+      padding: 25px;
+      background: #111c2e;
+      border: 1px solid #263449;
+      border-radius: 16px;
+    }
+    label {
+      display: block;
+      margin: 18px 0 9px;
+      font-weight: bold;
+    }
+    select, textarea, input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 9px;
+      border: 1px solid #34445b;
+      background: #091321;
+      color: white;
+      font-size: 15px;
+    }
+    textarea { min-height: 120px; resize: vertical; }
+    input[type=file] { font-size: 13px; }
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 20px;
+      border: 0;
+      border-radius: 9px;
+      background: #0284c7;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:active { background: #0369a1; }
+    .notice {
+      color: #fbbf24;
+      background: #292313;
+      border-radius: 9px;
+      padding: 13px;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-top: 18px;
+    }
+    #result {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #38bdf8;
+      border-radius: 9px;
+      line-height: 1.6;
+    }
+    footer {
+      text-align: center;
+      padding: 35px 15px;
+      color: #64748b;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Electro<span>Fix</span> AI</div>
+    <div>⚡ Electronics Assistant</div>
+  </header>
+
+  <section class="hero">
+    <div class="tag">SMART TROUBLESHOOTING</div>
+    <h1>Fix your electronics with <span>AI.</span></h1>
+    <p>Describe your device's problem and get beginner-friendly troubleshooting guidance.</p>
+  </section>
+
+  <main class="panel">
+    <h2>Diagnose your device</h2>
+
+    <form id="repairForm">
+      <label for="device">Select your device</label>
+      <select id="device" required>
+        <option value="">Choose a device</option>
+        <option>Smartphone</option>
+        <option>Laptop / Computer</option>
+        <option>Television</option>
+        <option>Headphones</option>
+        <option>Speaker</option>
+        <option>Gaming console</option>
+        <option>Home appliance</option>
+        <option>Other electronics</option>
+      </select>
+
+      <label for="problem">Describe the problem</label>
+      <textarea id="problem" required
+        placeholder="Example: My phone is charging but the battery percentage isn't increasing..."></textarea>
+
+      <label for="photos">Upload device photos (optional)</label>
+      <input id="photos" type="file" accept="image/*" multiple>
+
+      <div class="notice">
+        ⚠ Safety first: Never open electrical appliances or touch exposed wiring. Disconnect power if safe to do so. Stop if you notice smoke, unusual heat, sparks or a burning smell.
+      </div>
+
+      <button type="submit">Start Diagnosis →</button>
+    </form>
+
+    <div id="result" role="status"></div>
+  </main>
+
+  <footer>
+    ElectroFix AI · Your electronics troubleshooting companion
+    <br><br>
+    AI guidance is not a substitute for qualified repair services.
+  </footer>
+
+  <script>
+    document.getElementById("repairForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const device = document.getElementById("device").value;
+      const problem = document.getElementById("problem").value;
+      const result = document.getElementById("result");
+
+      result.style.display = "block";
+      result.innerHTML =
+        "<strong>Request received!</strong><br><br>" +
+        "Device: " + escapeHTML(device) + "<br>" +
+        "Problem: " + escapeHTML(problem) +
+        "<br><br>Our AI diagnostic system will be connected in the next development stage.";
+    });
+
+    function escapeHTML(text) {
+      return text.replace(/[&<>"']/g, function(c) {
+        return {
+          "&": "&amp;", "<": "&lt;", ">": "&gt;",
+          '"': "&quot;", "'": "&#39;"
+        }[c];
+      });
+    }
+  </script>
+</body>
+</html>
